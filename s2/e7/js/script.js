@@ -41,8 +41,13 @@ window.onload = function() {
     }
 
     function showStudents(event) {
+        let div = document.getElementById("content");
+        div.innerHTML = '';
+
         for (let student of studenten) {
-            console.log(student.showStudent());
+            let p = document.createElement("p");
+            p.innerHTML = student.showStudent();
+            div.appendChild(p);
         }
     }
 
