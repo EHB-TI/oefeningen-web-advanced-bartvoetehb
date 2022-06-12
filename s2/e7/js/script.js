@@ -1,23 +1,21 @@
 'use strict'
 
 window.onload = function() {
-    let student = {
-        name : "",
-        age : 0,
-        degree : "",
-        courses : [],
+    let studenten = [];
 
-        showStudent : function() {
+    function Student(name, age, degree) {
+        this.name = name;
+        this.age = age;
+        this.degree = degree;
+        this.courses = [];
+
+        this.showStudent = function() {
             return `Student ${this.name} is ${this.age} en studeert ${this.degree} met vakken ${this.courses.join(', ')}.`;
-        },
+        };
 
-        addCourses : function(...newcourses) {
+        this.addCourses = function(...newcourses) {
             this.courses = [...this.courses, ...newcourses];
-        },
-
-        setPersonalDetails : function(details)  {
-            [this.name,this.age, this.degree] = details;
-        }
+        };
     }
 
      function loadStudent(event) {
@@ -26,7 +24,7 @@ window.onload = function() {
         details.push(prompt("Geeft leeftijd: "));
         details.push(prompt("Geeft richting: "));
 
-        student.setPersonalDetails(details);
+        let student = new Student(...details);
 
         let cursus = ""
         while(true) {
@@ -38,6 +36,7 @@ window.onload = function() {
             }
         }
 
+        studenten.push(student);
         console.log(student.showStudent());
     }
 
