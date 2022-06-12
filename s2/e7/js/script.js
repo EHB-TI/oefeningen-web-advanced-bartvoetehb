@@ -40,7 +40,14 @@ window.onload = function() {
         console.log(student.showStudent());
     }
 
+    function showStudents(event) {
+        for (let student of studenten) {
+            console.log(student.showStudent());
+        }
+    }
+
     document.getElementById("createStudent").addEventListener("click", loadStudent);
+    document.getElementById("showStudents").addEventListener("click", showStudents);
 }
 
 
