@@ -1,0 +1,6 @@
+{
+    "name" : "Bart Voet",
+    "age" : 48,
+    "degree" : "PBA",
+    "courses" : ["Web Advanced", "Data Advanced"]
+}
