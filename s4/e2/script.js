@@ -20,21 +20,27 @@ window.onload = async function(event) {
 
     setCardVisibility(false);
 
-   async function searchMovie(title) {
-        //let response = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`);
-        let response = await fetch("stubdata.json"); //avoiding to many calls for now while developping card
-        let data = await response.json();
-        return data;
+    async function searchMovie(title) {
+        //let response = await fetch("stubdata.json"); //avoiding to many calls for now while developping card
+        let response = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`);
+        console.log(response.status);
+        if(response.ok) {
+            return await response.json();
+        } else {
+            return null;
+        }
     }
 
     function setCard(data) {
-        setCardVisibility(true);
-        document.getElementById("poster").src = data.Poster;
-        document.getElementById("title").innerHTML = data.Title;
-        document.getElementById("description").innerHTML = 
-                `Directed in the year ${data.Year} 
-                by ${data.Director}, 
-                length is ${data.Runtime}`;
+        if(data && !("Error" in data)) {
+            setCardVisibility(true);
+            document.getElementById("poster").src = data.Poster;
+            document.getElementById("title").innerHTML = data.Title;
+            document.getElementById("description").innerHTML = 
+                    `Directed in the year ${data.Year} 
+                    by ${data.Director}, 
+                    length is ${data.Runtime}`;
+        }
     }
 
     document.getElementById("movieSearch").addEventListener("submit",
