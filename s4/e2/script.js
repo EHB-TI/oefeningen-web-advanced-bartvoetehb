@@ -44,17 +44,21 @@ window.onload = async function(event) {
         }
     }
 
+    async function setMovie() {
+        //title, year, director, poster, runtime
+        let movieTitle = document.getElementById("movieTitle").value;
+        data = await searchMovie(movieTitle);
+        console.log(JSON.stringify(data));
+        if(data) {
+            currenData = data;
+        }
+        setCard(data);
+    }
+
     document.getElementById("movieSearch").addEventListener("submit",
         async function(event) {
             event.preventDefault();
-            let movieTitle = document.getElementById("movieTitle").value;
-            data = await searchMovie(movieTitle);
-            console.log(JSON.stringify(data));
-            if(data) {
-                currenData = data;
-            }
-            setCard(data);
-            //title, year, director, poster, runtime
+            setMovie();
         }
     );
 
