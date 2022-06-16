@@ -6,36 +6,35 @@ let currenData = null;
 
 window.onload = async function(event) {
 
-    function setCardVisibility(visible) {
-        
-        let content = document.getElementById("content");
+    function setVisibility(tag, visible) {
+        let content = document.getElementById(tag);
 
         if(visible) {
-            document.getElementById("content").removeAttribute("hidden");
+            content.removeAttribute("hidden");
         } else {
-            document.getElementById("content").setAttribute("hidden",true);
+            content.setAttribute("hidden",true);
         }
-
     }
+
+    let setCardVisibility = (visible) => setVisibility("content", visible);
 
     setCardVisibility(false);
 
-    async function searchMovie(title) {
-        let response = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`);
-        //let response = await fetch("stubdata.json"); //avoiding to many calls for now while developping card
+   async function searchMovie(title) {
+        //let response = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`);
+        let response = await fetch("stubdata.json"); //avoiding to many calls for now while developping card
         let data = await response.json();
         return data;
     }
-
-
 
     function setCard(data) {
         setCardVisibility(true);
         document.getElementById("poster").src = data.Poster;
         document.getElementById("title").innerHTML = data.Title;
-        document.getElementById("description").innerHTML = `Directed in the year ${data.Year} 
-        by ${data.Director}, 
-        length is ${data.Runtime}`
+        document.getElementById("description").innerHTML = 
+                `Directed in the year ${data.Year} 
+                by ${data.Director}, 
+                length is ${data.Runtime}`;
     }
 
     document.getElementById("movieSearch").addEventListener("submit",
