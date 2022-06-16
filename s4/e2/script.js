@@ -3,6 +3,7 @@ let apiKey = 'cceb1d2d';
 //http://www.omdbapi.com/?t=parasite
 
 let currenData = null;
+let count = 0;
 
 window.onload = async function(event) {
 
@@ -49,9 +50,20 @@ window.onload = async function(event) {
             let movieTitle = document.getElementById("movieTitle").value;
             data = await searchMovie(movieTitle);
             console.log(JSON.stringify(data));
-            currenData = data;
+            if(data) {
+                currenData = data;
+            }
             setCard(data);
             //title, year, director, poster, runtime
+        }
+    );
+
+    document.getElementById("plusButton").addEventListener("click", 
+        async function(event) {
+            if(currenData) {
+                count += Number.parseInt(currenData.Runtime);
+                document.getElementById("counter").innerHTML = count;
+            }
         }
     );
 };
